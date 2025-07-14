@@ -9,7 +9,7 @@ const isEmpty = (obj) => Object.keys(obj).length === 0;
 export function createGetter(path) {
   return function (obj) {
     if (isEmpty(obj)) {
-      return undefined;
+      return;
     }
 
     const keys = path.split(".");
