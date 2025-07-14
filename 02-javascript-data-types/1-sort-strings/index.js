@@ -11,9 +11,8 @@ export function sortStrings(arr, param = "asc") {
     caseFirst: "upper",
   });
 
-  const comparingFunc = (a, b) => collator.compare(a, b);
+  const comparingFunc = (a, b) =>
+    param === "asc" ? collator.compare(a, b) : collator.compare(b, a);
 
-  const sorted = [...arr].sort(comparingFunc);
-
-  return param === "desc" ? sorted.reverse() : sorted;
+  return [...arr].sort(comparingFunc);
 }
