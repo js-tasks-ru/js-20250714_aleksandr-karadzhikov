@@ -23,6 +23,11 @@ export function createGetter(path) {
       currentKey
     ) {
       current = current[currentKey];
+
+      if (!current && keys.length >= 1) {
+        return;
+      }
+
       currentKey = keys.shift();
     }
 
