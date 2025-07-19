@@ -1,7 +1,7 @@
 const MAX_CHART_HEIGHT = 50;
 
 export default class ColumnChart {
-  constructor({ data, label, link, value, formatHeading } = {}) {
+  constructor({ data = [], label, link, value, formatHeading } = {}) {
     this.data = data;
     this.label = label;
     this.link = link;
@@ -11,7 +11,7 @@ export default class ColumnChart {
     this.chartHeight = MAX_CHART_HEIGHT;
   }
 
-  update(newData) {
+  update(newData = []) {
     if (this.element) {
       this.data = newData;
 
@@ -27,9 +27,10 @@ export default class ColumnChart {
 
   renderChart() {
     const chart = document.createElement("div");
-    chart.className = !this.data
-      ? "column-chart column-chart_loading"
-      : "column-chart";
+    chart.className =
+      this.data.length === 0
+        ? "column-chart column-chart_loading"
+        : "column-chart";
     chart.style.setProperty("--chart-height", MAX_CHART_HEIGHT);
 
     const chartHtml = [this.getChartTitleHtml(), this.getChartContainerHtml()];
@@ -71,7 +72,7 @@ export default class ColumnChart {
   }
 
   calculateChartData() {
-    const data = this.data ?? [];
+    const data = this.data;
     const maxValue = Math.max(...(data ?? []));
     const scale = MAX_CHART_HEIGHT / maxValue;
 
